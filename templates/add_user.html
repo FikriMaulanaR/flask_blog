@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    {% if title %}
+    <title>Flask Blog - {{ title }}</title>
+    {% else %}
+    <title>Flask Blog</title>
+    {% endif %}
+    <link rel="icon" type="image/x-icon" href="../src/assets/img/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    <link href="{{ url_for('static', filename='css/loader.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    
+    <link href="{{ url_for('static', filename='layouts/collapsible-menu/css/light/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='src/assets/css/light/authentication/auth-boxed.css') }}src/assets/css/light/authentication/auth-boxed.css" rel="stylesheet" type="text/css" />
+
+    <link href="{{ url_for('static', filename='css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/auth-boxed.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    
+</head>
+<body class="form">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <div class="auth-container d-flex">
+
+        <div class="container mx-auto align-self-center">
+            
+            <div class="row">
+    
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center mx-auto">
+                    <div class="card mt-3 mb-3">
+                        <div class="card-body">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    
+                                    <h2>New User</h2>
+                                    <p>Please fill in all fields to create a new user!</p>
+                                    
+                                </div>
+                                <form method="POST" action="" novalidate>
+                                    {{ form.hidden_tag() }}
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            {{ form.username.label(class="form-label") }}
+                                            {% if form.username.errors %}
+                                            {{ form.username(class="form-control is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.username.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{ form.username(class="form-control") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            {{ form.email.label(class="form-label") }}
+                                            {% if form.email.errors %}
+                                            {{ form.email(class="form-control is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.email.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{ form.email(class="form-control") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            {{ form.user_fullname.label(class="form-label") }}
+                                            {% if form.user_fullname.errors %}
+                                                {{ form.user_fullname(class="form-control is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.user_fullname.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.user_fullname(class="form-control") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            {{ form.password_hash.label(class="form-label") }}
+                                            {% if form.password_hash.errors %}
+                                                {{ form.password_hash(class="form-control is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.password_hash.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.password_hash(class="form-control") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            {{ form.confirm_password.label(class="form-label") }}
+                                            {% if form.confirm_password.errors %}
+                                                {{ form.confirm_password(class="form-control is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.confirm_password.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.confirm_password(class="form-control") }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            {{ form.user_group.label(class="form-label") }}
+                                            {% if form.user_group.errors %}
+                                                {{ form.user_group(class="form-control is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.user_group.errors %}
+                                                    <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.user_group(class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12">
+                                        <div class="mb-3">
+                                            <div class="form-check form-check-primary form-check-inline">
+                                                <input class="form-check-input me-3" type="checkbox" id="form-check-default">
+                                                <label class="form-check-label" for="form-check-default">
+                                                    I agree the <a href="javascript:void(0);" class="text-primary">Terms and Conditions</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    
+                                    <div class="col-12">
+                                        <div class="mb-4">
+                                            {{ form.submit(class="btn btn-secondary w-100") }}
+                                        </div>
+                                            <div class="mb-4">
+                                                <button class="btn btn-danger"><a href="{{ url_for('user') }}">Back</a></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+    
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+</body>
+</html>

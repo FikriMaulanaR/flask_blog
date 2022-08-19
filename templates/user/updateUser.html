@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="/update/{{ user_update.id }}" novalidate>
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Update User</legend>
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control", value=user_update.username) }}
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control", value=user_update.email) }}
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.user_fullname.label(class="form-label") }}
+                    {% if form.user_fullname.errors %}
+                        {{ form.user_fullname(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.user_fullname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.user_fullname(class="form-control", value=user_update.user_fullname) }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }} <button type="button" class="btn btn-outline-danger"><a href="{{ url_for('user') }}">Back</a></button>
+            </div>
+        </form>
+    </div>
+{% endblock%}

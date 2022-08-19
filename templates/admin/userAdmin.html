@@ -1,0 +1,44 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<center><h3>List Users</h3></center>
+<hr>
+<div class="row">
+    <div class="col-md-4" style="float:right;">
+        <a href="{{ url_for('register') }}", class="btn btn-success btn-buy-now">Add New User</a>
+    </div>
+    <div class="col-md">
+        <table class="table" style="width:100%; text-align: center;">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Username</td>
+                    <td>Password</td>
+                    <td>Full Name</td>
+                    <td>Email</td>
+                    <td>Created</td>
+                    <td>User Status</td>
+                    <td>Role</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            {% for user in users %}
+            <tbody>
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td><a href="{{ url_for('userChangePassword', id=user.id) }}">Change Password</a></td>                    <td>{{ user.user_fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.create_date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ user.user_enable }}</td>
+                    <td>{{ user.user_group }}</td>
+                    <td>
+                        <a href="{{ url_for('update', id=user.id) }}" class="btn btn-primary btn-preview">Update</a><br><br>
+                        <a href="{{ url_for('delete', id=user.id) }}" class="btn btn-danger btn-delete btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

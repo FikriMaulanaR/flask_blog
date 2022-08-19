@@ -1,0 +1,56 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<br>
+<center><h3>Profile</h3></center>
+<hr>
+<div class="row">
+    <div class="col-md">
+        <table align="center" class="table" style="width: auto; margin: 0px auto;">
+            {% for user in users %}
+            {% if user.id == current_user.id %}
+            <thead>
+                <tr>
+                    <th class="col-md-2">ID</th>
+                    <td style="width: 70%;">{{ user.id }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td><a href="{{ url_for('userChangePassword', id=user.id) }}">Change Password</a></td>
+                </tr>
+                <tr>
+                    <th>Fullname</th>
+                    <td>{{ user.user_fullname }}</td>
+                </tr>    
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td>{{ user.create_date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                <tr>
+                    <th>User Status</th>
+                    <td>{{ user.user_enable }}</td>
+                </tr>
+                <tr>
+                    <th>Role</th>
+                    <td>{{ user.user_group }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('update', id=user.id) }}" class="btn btn-primary btn-preview">Update</a>
+        {% else %}
+
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
