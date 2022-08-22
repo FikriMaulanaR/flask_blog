@@ -46,7 +46,7 @@ class UpdateForm(FlaskForm):
             if username.data != current_user.username:
                 user = db.session.query(User_flask).filter_by(username=username.data).first()
                 if user:
-                    raise ValidationError('Username Already Exist')
+                    raise ValidationError('Username Already Exists')
                 return user
     
     def validate_email(self, email):
@@ -54,7 +54,7 @@ class UpdateForm(FlaskForm):
             if email.data != current_user.email:
                 eml = db.session.query(User_flask).filter_by(email=email.data).first()
                 if eml:
-                    raise ValidationError('Email Already Exist')
+                    raise ValidationError('Email Already Exists')
                 return eml
 
 class ChangePassword(FlaskForm):

@@ -89,10 +89,7 @@ def index():
 @app.route("/admin/")
 @login_required
 def adminIndex():
-    results = db.session.query(Sessions).all()
-    for r in results:
-        print(r.session_id)
-    return render_template('admin/index.html', title='Admin Site', results=results)
+    return render_template('admin/index.html', title='Admin Site')
 
 @app.route("/admin/user")
 @login_required
@@ -263,29 +260,29 @@ def logout():
 def login():
     username = None
     form = LoginForm()
-    if form.validate_on_submit():
-        user = User_flask.query.filter_by(username=form.username.data).first()
-        if user:
-            # check the hash
-            if check_password_hash(user.password_hash, form.password_hash.data):
-                login_user(user)
-                try:
-                    sesss = db.session.query(Sessions).order_by(Sessions.session_id.desc()).first()
-                    form.session_user = sesss
-                    User_flask.query.filter_by(username=current_user.username).update(dict(session_user=form.session_user.data))
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User_flask.query.filter_by(username=form.username.data).first()
+            if user:
+                # check the hash
+                if check_password_hash(user.password_hash, form.password_hash.data):
+                    login_user(user)
+                    sesss = db.session.query(Sessions).order_by(Sessions.session_id.desc()).with_entities(Sessions.session_id).first()
+                    form.session_user.data = sesss
+                    print("Hello", sesss)
+                    User_flask.query.filter_by(username=user.username).update(dict(session_user=str(sesss)))
+                    #db.session.query(User_flask).filter_by(username=user).update({'session_user':form.session_user.data})
                     db.session.commit()
-                except InternalError:
-                    db.session.rollback()
-                flash(f"Login Succesfull!! hello {form.username.data}!", "success")
-                if current_user.user_group == 'Admin':
-                    return redirect(url_for('adminIndex', form=form, username=username))
+                    flash(f"Login Succesfull!! hello {form.username.data}!", "success")
+                    if current_user.user_group == 'Admin':
+                        return redirect(url_for('adminIndex', form=form, username=username))
+                    else:
+                        return redirect(url_for('index', form=form, username=username, user=user))
                 else:
-                    return redirect(url_for('index', form=form, username=username, user=user))
+                    flash("Wrong Password - Try Again!", "warning")
             else:
-                flash("Wrong Password - Try Again!", "warning")
-        else:
-            flash("User Doesn't Exists!", "warning")
-            return redirect(url_for('login'))
+                flash("User Doesn't Exists!", "warning")
+                return redirect(url_for('login'))
     return render_template('login.html', form=form, username=username, title='Login')
     #if request.method == "POST" and 'username' in request.form and 'password' in request.form:
         #session.permanent = True
