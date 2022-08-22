@@ -178,26 +178,17 @@ def update(id):
                 #usr = db.session.query(User_flask).filter(User_flask.id!=user_update.id).filter(User_flask.username!=form.username.data).first()
                 #eml = db.session.query(User_flask).filter(User_flask.email!=user_update.email).filter(User_flask.email!=user_update.email).first()
                 #if User_flask.query.filter_by(username=form.username.data).first() and form.username.data != current_user.username:
-                
-                if db.session.query(User_flask).filter(User_flask.id!=user_update.id).filter(User_flask.username==form.username.data).first() is None:
-                    if db.session.query(User_flask).filter(User_flask.id!=user_update.id).filter(User_flask.email==form.email.data).first() is None:
-                        try:
-                            user_update = db.session.merge(user_update)
-                            db.session.commit()
-                            flash('User Updated Successfully', 'success')
-                            return redirect(url_for('userAdmin'))
-                        except IntegrityError:
-                            db.session.rollback()    
-                            flash('Error! Looks like there was an error!', "warning")
-                            return render_template('admin/updateAdmin.html', title='Update User', form=form, user_update=user_update)
-                        finally:
-                            db.session.close()
-                    else:
-                        flash("Email Already Exists!", "warning")
-                        return render_template('admin/updateAdmin.html', form=form, user_update=user_update, title='Update User')
-                else:
-                    flash("Username Already Exists!", "warning")
-                    return render_template('admin/updateAdmin.html', form=form, user_update=user_update, title='Update User')
+                try:
+                    user_update = db.session.merge(user_update)
+                    db.session.commit()
+                    flash('User Updated Successfully', 'success')
+                    return redirect(url_for('userAdmin'))
+                except IntegrityError:
+                    db.session.rollback()    
+                    flash('Username Or Email Already Exists!', "warning")
+                    return render_template('admin/updateAdmin.html', title='Update User', form=form, user_update=user_update)
+                finally:
+                    db.session.close()
             else:
                 return render_template('admin/updateAdmin.html', form=form, user_update=user_update, title='Update User')
         else:
