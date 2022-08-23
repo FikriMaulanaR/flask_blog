@@ -177,6 +177,30 @@ body a {
 body a.btn {
   transition: 0.5s;
 }
+body a.btn-danger {
+  color: #eaf1ff;
+  background-color: #b33232;
+  border: none;
+  margin-left: 20px;
+}
+
+body a.btn-danger:hover {
+  background-color: #c2d5ff;
+  color: #ee4343;
+  border: none;
+}
+body a.btn-menu {
+  color: #eaf1ff;
+  background-color: #3249b3;
+  border: none;
+  margin-left: 20px;
+}
+
+body a.btn-menu:hover {
+  background-color: #c2d5ff;
+  color: #3249b3;
+  border: none;
+}
 body a.btn-preview {
   color: #eaf1ff;
   background-color: #4361ee;
@@ -290,6 +314,7 @@ body .alert.alert-success span {
   font-size: 15px;
   font-weight: 600;
 }
+
 body .navbar {
   padding: 7px;
   background-color: #fff;
@@ -666,6 +691,325 @@ body .badge {
   border-radius: 6px;
   letter-spacing: 1px;
 }
+.badge:hover {
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+.badge--group {
+  display: inline-flex;
+}
+.badge--group .badge {
+  border: 2px solid #e0e6ed;
+}
+.badge--group .badge:not(:first-child) {
+  margin-left: -6px;
+}
+
+.badge-dot:empty {
+  display: block;
+}
+
+.badge--group .badge-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.badge svg {
+  width: 15px;
+  height: 15px;
+  vertical-align: top;
+  margin-right: 3px;
+}
+.badge.badge-enabled {
+  background-color: #00ab55;
+  color: #fff;
+}
+.badge.badge-disable {
+  background-color: #e7515a;
+  color: #fff;
+}
+
+.badge-collapsed-img img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #515365;
+  margin-left: -21px;
+}
+.badge-collapsed-img.badge-tooltip img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.3);
+  margin-left: -21px;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.badge-collapsed-img.badge-tooltip img:hover {
+  -webkit-transform: translateY(-5px) scale(1.02);
+  transform: translateY(-5px) scale(1.02);
+}
+.badge-collapsed-img.translateY-axis img {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.badge-collapsed-img.translateY-axis img:hover {
+  -webkit-transform: translateY(-5px) scale(1.02);
+  transform: translateY(-5px) scale(1.02);
+}
+.badge-collapsed-img.rectangle-collapsed img {
+  width: 45px;
+  height: 32px;
+}
+.badge-collapsed-img.translateX-axis img {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.badge-collapsed-img.translateX-axis img:hover {
+  -webkit-transform: translateX(5px) scale(1.02);
+  transform: translateX(5px) scale(1.02);
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: #4361ee;
+}
+
+.badge-info {
+  color: #fff;
+  background-color: #2196f3;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #00ab55;
+}
+
+.badge-danger {
+  color: #fff;
+  background-color: #e7515a;
+}
+
+.badge-warning {
+  color: #fff;
+  background-color: #e2a03f;
+}
+
+.badge-dark {
+  color: #fff;
+  background-color: #3b3f5c;
+}
+
+.badge-secondary {
+  background-color: #805dca;
+}
+
+.outline-badge-primary {
+  color: #4361ee;
+  background-color: transparent;
+  border: 1px solid #4361ee;
+}
+
+.outline-badge-info {
+  color: #2196f3;
+  background-color: transparent;
+  border: 1px solid #2196f3;
+}
+
+.outline-badge-success {
+  color: #00ab55;
+  background-color: transparent;
+  border: 1px solid #00ab55;
+}
+
+.outline-badge-danger {
+  color: #e7515a;
+  background-color: transparent;
+  border: 1px solid #e7515a;
+}
+
+.outline-badge-warning {
+  color: #e2a03f;
+  background-color: transparent;
+  border: 1px solid #e2a03f;
+}
+
+.outline-badge-dark {
+  color: #3b3f5c;
+  background-color: transparent;
+  border: 1px solid #3b3f5c;
+}
+
+.outline-badge-secondary {
+  color: #805dca;
+  background-color: transparent;
+  border: 1px solid #805dca;
+}
+
+.outline-badge-primary:focus, .outline-badge-primary:hover {
+  background-color: #4361ee;
+  color: #fff;
+}
+
+.outline-badge-secondary:focus, .outline-badge-secondary:hover {
+  color: #fff;
+  background-color: #805dca;
+}
+
+.outline-badge-success:focus, .outline-badge-success:hover {
+  color: #fff;
+  background-color: #00ab55;
+}
+
+.outline-badge-danger:focus, .outline-badge-danger:hover {
+  color: #fff;
+  background-color: #e7515a;
+}
+
+.outline-badge-warning:focus, .outline-badge-warning:hover {
+  color: #fff;
+  background-color: #e2a03f;
+}
+
+.outline-badge-info:focus, .outline-badge-info:hover {
+  color: #fff;
+  background-color: #2196f3;
+}
+
+.outline-badge-dark:focus, .outline-badge-dark:hover {
+  color: #fff;
+  background-color: #3b3f5c;
+}
+
+body .badge-light-primary {
+  color: #4361ee;
+  background-color: #eceffe;
+  border: 1px solid #eceffe;
+}
+
+body .badge-light-info {
+  color: #2196f3;
+  background-color: #e6f4ff;
+  border: 1px solid #e6f4ff;
+}
+
+body .badge-light-success {
+  color: #00ab55;
+  background-color: #ddf5f0;
+  border: 1px solid #ddf5f0;
+}
+
+body .badge-light-danger {
+  color: #f21616;
+  background-color: #fbeced;
+  border: 1px solid #fbeced;
+}
+
+body .badge-light-warning {
+  color: #e2a03f;
+  background-color: #fcf5e9;
+  border: 1px solid #fcf5e9;
+}
+
+body .badge-light-dark {
+  color: #3b3f5c;
+  background-color: #eaeaec;
+  border: 1px solid #eaeaec;
+}
+
+body .badge-light-secondary {
+  color: #805dca;
+  background-color: #f2eafa;
+  border: 1px solid #f2eafa;
+}
+
+/*      Link     */
+.badge[class*=link-badge-] {
+  cursor: pointer;
+}
+
+.link-badge-primary {
+  color: #4361ee;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-info {
+  color: #2196f3;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-success {
+  color: #00ab55;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-danger {
+  color: #e7515a;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-warning {
+  color: #e2a03f;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-dark {
+  color: #3b3f5c;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-secondary {
+  color: #805dca;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.link-badge-primary:focus, .link-badge-primary:hover {
+  color: #4361ee;
+  background-color: transparent;
+}
+
+.link-badge-secondary:focus, .link-badge-secondary:hover {
+  color: #6f51ea;
+  background-color: transparent;
+}
+
+.link-badge-success:focus, .link-badge-success:hover {
+  color: #2ea37d;
+  background-color: transparent;
+}
+
+.link-badge-danger:focus, .link-badge-danger:hover {
+  color: #e7515a;
+  background-color: transparent;
+}
+
+.link-badge-warning:focus, .link-badge-warning:hover {
+  color: #dea82a;
+  background-color: transparent;
+}
+
+.link-badge-info:focus, .link-badge-info:hover {
+  color: #009eda;
+  background-color: transparent;
+}
+
+.link-badge-dark:focus, .link-badge-dark:hover {
+  color: #454656;
+  background-color: transparent;
+}
 body .bg-primary {
   background-color: #4361ee !important;
 }
@@ -708,5 +1052,53 @@ body .text-dark {
 body .text-secondary {
   color: #805dca !important;
 }
+body .tree,
+.tree ul {
+  margin:0 0 0 1em; /* indentation */
+  padding:0;
+  list-style:none;
+  color:#000000;
+  position:relative;
+}
 
+body .tree ul {margin-left:.5em} 
+
+body .tree:before,
+.tree ul:before {
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid;
+}
+
+body .tree li {
+  margin:0;
+  padding:0 1.5em; /* indentation + .5em */
+  line-height:2em; /* default list item's `line-height` */
+  font-weight:bold;
+  position:relative;
+}
+
+body .tree li:before {
+  content:"";
+  display:block;
+  width:10px; /* same with indentation */
+  height:0;
+  border-top:1px solid;
+  margin-top:-1px; /* border top width */
+  position:absolute;
+  top:1em; /* (line-height/2) */
+  left:0;
+}
+
+body .tree li:last-child:before {
+  background: #ffffff; /* same with body background */
+  height:auto;
+  top:1em; /* (line-height/2) */
+  bottom:0;
+}
 /*# sourceMappingURL=style.css.map */

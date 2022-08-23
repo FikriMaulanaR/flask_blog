@@ -125,10 +125,10 @@ def delete(id):
         db.session.delete(user_delete)
         db.session.commit()
         flash("User Deleted Successfully!", "danger")
-        return render_template("user.html", users=users, user_delete=user_delete)
+        return render_template("admin/userAdmin.html", users=users, user_delete=user_delete)
     except:
         flash("Error! Looks like there was a problem... Try Again!", "warning")
-        return render_template("user.html", users=users, user_delete=user_delete)
+        return render_template("admin/userAdmin.html", users=users, user_delete=user_delete)
 
 @app.route("/user/change-password/<int:id>", methods=['GET', 'POST'])
 @login_required
@@ -179,7 +179,7 @@ def update(id):
                 #eml = db.session.query(User_flask).filter(User_flask.email!=user_update.email).filter(User_flask.email!=user_update.email).first()
                 #if User_flask.query.filter_by(username=form.username.data).first() and form.username.data != current_user.username:
                 try:
-                    user_update = db.session.merge(user_update)
+                    db.session.merge(user_update)
                     db.session.commit()
                     flash('User Updated Successfully', 'success')
                     return redirect(url_for('userAdmin'))
@@ -203,7 +203,7 @@ def update(id):
                 try:
                     db.session.commit()
                     flash('User Updated Successfully', 'success')
-                    return redirect(url_for('user'))
+                    return redirect(url_for('about'))
                 except:    
                     flash('Error! Looks like there was an error!', 'warning')
                     return render_template('user/updateUser.html', title='Update User', form=form, user_update=user_update)
@@ -229,7 +229,7 @@ def register():
                 db.session.commit()
                 
                 flash(f'Account created for {form.username.data}!', 'success')
-                return redirect(url_for('home'))
+                return redirect(url_for('adminIndex'))
             else:
                 flash('Email Already Exists!', 'warning')
                 return render_template('add_user.html', title='Register', form=form, username=username, email=email)

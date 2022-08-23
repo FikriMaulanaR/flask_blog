@@ -164,8 +164,13 @@
                         
 
                         <div class="action-btns">
-                            <a class="btn btn-primary btn-preview" href="https://designreset.com/cork-admin">Preview</a>
-                            <a class="btn btn-success btn-buy-now" href="##">Buy Now</a>
+                            {% if current_user.user_group == 'Admin' %}
+                            <a class="btn btn-success btn-buy-now" href="{{ url_for('userAdmin') }}">Users</a>
+                            <a class="btn btn-primary btn-menu" href="{{ url_for('about') }}">Profile</a>
+                            <a class="btn btn-primary btn-danger" href="{{ url_for('logout') }}">Logout</a>
+                            {% else %}
+                            <a class="btn btn-primary btn-preview" href="{{ url_for('index') }}">Kembali</a>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -240,6 +245,7 @@
     <script src="{{ url_for('static', filename='js/prism.js') }}"></script>
     <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/span.js') }}"></script>
     <script type="text/javascript">
     function myFunction(e) {
         if (document.querySelector('#navList a.active') !== null) {
