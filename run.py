@@ -185,7 +185,7 @@ def update(id):
                     return redirect(url_for('userAdmin'))
                 except IntegrityError:
                     db.session.rollback()    
-                    flash('Username Or Email Already Exists!', "warning")
+                    flash('Error! Username Or Email Already Exists! or Invalid Input Form!', "warning")
                     return render_template('admin/updateAdmin.html', title='Update User', form=form, user_update=user_update)
                 finally:
                     db.session.close()
@@ -220,9 +220,9 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         usr = User_flask.query.filter_by(username=form.username.data).first()
-        eml = User_flask.query.filter_by(email=form.email.data).first()
+        email_ = User_flask.query.filter_by(email=form.email.data).first()
         if usr is None:
-            if eml is None:
+            if email_ is None:
                 hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
                 usr = User_flask(username=form.username.data, password_hash=hashed_pw, user_fullname=form.user_fullname.data, email=form.email.data, user_group=form.user_group.data)
                 db.session.add(usr)
@@ -258,10 +258,11 @@ def login():
                 # check the hash
                 if check_password_hash(user.password_hash, form.password_hash.data):
                     login_user(user)
-                    sesss = db.session.query(Sessions).order_by(Sessions.session_id.desc()).with_entities(Sessions.session_id).first()
-                    form.session_user.data = sesss
-                    print("Hello", sesss)
-                    User_flask.query.filter_by(username=user.username).update(dict(session_user=str(sesss)))
+                    session_data = db.session.query(Sessions).order_by(Sessions.session_id.desc()).with_entities(Sessions.session_id).first()
+                    form.session_user.data = session_data
+                    print("Hello", session_data)
+                    print("Test", form.session_user.data)
+                    User_flask.query.filter_by(username=user.username).update(dict(session_user=str(form.session_user.data)))
                     #db.session.query(User_flask).filter_by(username=user).update({'session_user':form.session_user.data})
                     db.session.commit()
                     flash(f"Login Succesfull!! hello {form.username.data}!", "success")
